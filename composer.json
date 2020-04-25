@@ -1,0 +1,6 @@
+{
+    "name": "jonathan/bulk-add-posts-for-wordpress",
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.11"
+    }
+}
