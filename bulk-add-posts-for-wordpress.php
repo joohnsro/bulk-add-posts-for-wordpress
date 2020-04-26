@@ -4,7 +4,7 @@
  */
 
  /**
-  * 1 - Adição de campo para subir arquivo de planilhas
+  * 1 - Adição de campos
   * 2 - Formatação de dados
   * 3 - Inclusão de posts
   */
