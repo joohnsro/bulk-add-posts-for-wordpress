@@ -10,7 +10,7 @@
     <div class="posts-list">
 
         <div class="post-item">
-            <h3>Post #1</h3>
+            <h3>Post #<span class="loopIndex">1</span></h3>
             <div class="post-prop">
                 <input name="post[0]['title']" type="text" placeholder="Título" />
             </div>
@@ -36,3 +36,7 @@
     
 
 </div>
+
+<script>
+<?php require( __DIR__ . '/scripts.js' ); ?>
+</script>
