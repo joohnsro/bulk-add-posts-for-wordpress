@@ -40,7 +40,8 @@
 }
 
 .post-prop input,
-.post-prop textarea {
+.post-prop textarea,
+.post-prop .check-list {
     flex: 1;
     font-size: 14px;
     padding: 10px 15px;
@@ -61,8 +62,61 @@
     justify-content: space-between;
 }
 
-.post-prop.double-prop * {
+.post-prop.double-prop input,
+.post-prop.double-prop textarea {
     max-width: calc( 50% - 10px );
+}
+
+.post-prop.double-prop.titles {
+    margin-bottom: 5px;
+}
+
+.post-prop.double-prop.titles label {
+    max-width: calc( 50% - 10px );
+    flex: 1;
+}
+
+.post-prop .check-list {
+    height: 140px;
+    overflow-x: auto;
+}
+
+.post-prop .check-list:not(:last-child) {
+    margin-right: 20px;
+}
+
+.post-prop .check-list .check-list-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    min-width: 100%;
+    margin: 0 0 12px 0;
+}
+
+.post-prop .check-list .check-list-item:last-child {
+    margin: 0;
+}
+
+.post-prop .check-list .check-list-item * {
+    flex: 1;
+}
+
+.post-prop .check-list .check-list-item input {
+    max-width: 18px;
+    width: 18px;
+    height: 18px;
+    border-radius: unset;
+    padding: 0;
+    margin: 0 10px 0 0;
+}
+
+.post-prop .check-list .check-list-item label {
+    display: block;
+    min-width: calc( 100% - 30px );
+    font-weight: normal;
+    color: #444444;
 }
 
 .controls {

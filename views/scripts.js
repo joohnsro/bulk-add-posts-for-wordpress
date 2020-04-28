@@ -2,7 +2,9 @@ var button = document.querySelector('.btn-addpost');
 
 button.addEventListener('click', addPostSketch);
 
-function addPostSketch() {
+function addPostSketch( event ) {
+    event.preventDefault();
+
     var sketch = document.querySelector('.post-item'),
         parent = sketch.parentElement;
     
