@@ -7,42 +7,72 @@
     <h2>Adicione várias publicações de uma só vez</h2>
     <br />
 
-    <form method="post" action="#">
+    <form method="post" action="#" enctype="multipart/form-data">
 
         <div class="posts-list">
 
             <div class="post-item">
                 <h3>Publicação #<span class="loopIndex">1</span></h3>
                 <div class="post-prop">
-                    <input name="post[0]['title']" type="text" placeholder="Título" />
+                    <input name="posts[0][title]" type="text" placeholder="Título" />
                 </div>
                 <div class="post-prop">
-                    <textarea name="post[0]['content']" placeholder="Conteúdo"></textarea>
+                    <textarea name="posts[0][content]" placeholder="Conteúdo"></textarea>
                 </div>
                 <div class="post-prop double-prop">
-                    <input name="post[0]['date']" type="text" placeholder="Dia" />
-                    <input name="post[0]['hour']" type="text" placeholder="Hora" />
+                    <input name="posts[0][date]" type="text" placeholder="Dia" value="01/05/2020" />
+                    <input name="posts[0][hour]" type="text" placeholder="Hora" value="16:05:10" />
                 </div>
                 <div class="post-prop">
                     <label>Imagem destacada</label>
-                    <input name="post[0]['file']" type="file" />
-                </div>     
+                    <input name="posts[0][file]" type="file" />
+                </div>
+                <div class="post-prop">
+                    <label>Autores</label>
+                    <select name="posts[0][author]">
+                    <option value=""></option>
+                        <?php if ( $authors && count( $authors ) > 0 ) { ?>
+                            <?php foreach( $authors as $author ) { ?>
+                                <option value="<?php echo $author->ID; ?>"><?php echo esc_html($author->display_name); ?></option>
+                            <?php } ?>
+                        <?php } ?>
+                    </select>
+                </div>
                 <div class="post-prop double-prop titles">
                     <label>Categorias</label>
                     <label>Tags</label>
                 </div>
                 <div class="post-prop double-prop">
                     <div class="check-list">
-                        <div class="check-list-item">
-                            <input type="checkbox" id="post[0]['categoria']['categoria-1']" name="post[0]['categoria']['categoria-1']" placeholder="Categoria 1" />
-                            <label for="post[0]['categoria']['categoria-1']">Categoria 1</label>
-                        </div>
+
+                        <?php if ( $categories && count( $categories ) > 0 ) { ?>
+                            <?php foreach( $categories as $category ) { ?>
+                                <div class="check-list-item">
+                                    <input type="checkbox" id="posts[0][categories][<?php echo $category->term_id; ?>]" 
+                                        name="posts[0][categories][<?php echo $category->term_id; ?>]" />
+                                    
+                                    <label for="posts[0][categories][<?php echo $category->term_id; ?>]">
+                                        <?php echo esc_html($category->name); ?>
+                                    </label>
+                                </div>
+                            <?php } ?>
+                        <?php } ?>
+
                     </div>
                     <div class="check-list">
-                    <div class="check-list-item">
-                            <input type="checkbox" id="post[0]['tag']['tag-1']" name="post[0]['tag']['tag-1']" placeholder="Categoria 1" />
-                            <label for="post[0]['tag']['tag-1']">Tag 1</label>
-                        </div>
+
+                        <?php if ( $tags && count( $tags ) > 0 ) { ?>
+                            <?php foreach( $tags as $tag ) { ?>
+                                <div class="check-list-item">
+                                    <input type="checkbox" id="posts[0][tags][<?php echo $tag->term_id; ?>]" 
+                                        name="posts[0][tags][<?php echo $tag->term_id; ?>]" />
+                                    
+                                    <label for="posts[0][tags][<?php echo $tag->term_id; ?>]">
+                                        <?php echo esc_html( $tag->name ); ?>
+                                    </label>
+                                </div>
+                            <?php } ?>
+                        <?php } ?>
                     </div>
                 </div>   
             </div>

@@ -17,13 +17,25 @@ function addPostSketch( event ) {
     var loopIndex = total + 1;
     newPost.querySelector('.loopIndex').innerHTML = loopIndex;
 
-    var inputs = newPost.querySelectorAll('input, textarea');
+    var inputs = newPost.querySelectorAll('input, textarea, label');
 
     for( var i = 0; i < inputs.length; i++ ){
-        var name = inputs[i].getAttribute('name'),
+
+        if ( inputs[i].getAttribute('name') ) {
+            var name = inputs[i].getAttribute('name'),
             newName = name.replace('[0]', '[' + (loopIndex-1)  + ']');
 
-        inputs[i].setAttribute('name', newName );
+            inputs[i].setAttribute('id', newName );
+            inputs[i].setAttribute('name', newName );
+        }
+
+        if ( inputs[i].getAttribute('for') ) {
+            var name = inputs[i].getAttribute('for'),
+            newName = name.replace('[0]', '[' + (loopIndex-1)  + ']');
+
+            inputs[i].setAttribute('for', newName );
+        }
+                
     }
 
     parent.appendChild(newPost);

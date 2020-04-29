@@ -40,7 +40,9 @@
 }
 
 .post-prop input,
+.post-prop input[type='file'],
 .post-prop textarea,
+.post-prop select,
 .post-prop .check-list {
     flex: 1;
     font-size: 14px;
