@@ -2,7 +2,7 @@
 if ( isset( $_POST ) && count($_POST) > 0 ) {
 
     $posts = $_POST['posts'];
-    
+
     $result = array(
         'success'   => array(),
         'error'     => array(),
@@ -15,7 +15,7 @@ if ( isset( $_POST ) && count($_POST) > 0 ) {
                      substr( $post['date'], 0, 2 ) . ' ' . 
                      $post['hour'];
 
-        $author     = ( $post['author'] != '' ) ? $post['author'] : 0;
+        $author     = ( isset( $post['author'] ) && $post['author'] != '' ) ? $post['author'] : 0;
 
         $categories = ( isset( $post['categories'] ) && count( $post['categories'] ) > 0 ) ? 
                         array_keys( $post['categories'] ) : array();
@@ -47,16 +47,12 @@ if ( isset( $_POST ) && count($_POST) > 0 ) {
 
             if ( isset($post['file']) && $post['file'] != '' ) {
                 
-                $filename = sanitize_text_field( $post['file']['name'] );
-                $upload_file = wp_upload_bits($filename, null, file_get_contents($post['file']['tmp_name']));
-                
-                if (!$upload_file['error']) {
-                    $wp_filetype = wp_check_filetype($filename, null );
-                    $attachment = array( 'post_mime_type' => $wp_filetype['type'] );
-                    $attachment_id = wp_insert_attachment( $attachment, $upload_file['file'] );
+                $attachment_id = media_handle_sideload( $post['file'] );
 
+                if ( $attachment_id ) {
                     set_post_thumbnail( $post_id, $attachment_id );
                 }
+
             }
 
             $result['success'][]    = wp_strip_all_tags( $post['title'] );
