@@ -10,11 +10,6 @@ if ( isset( $_POST ) && count($_POST) > 0 ) {
     
     foreach ( $posts as $key=>$post ) {
 
-        $full_date  = substr( $post['date'], 6, 4 ) . '-' . 
-                     substr( $post['date'], 3, 2 ) . '-' . 
-                     substr( $post['date'], 0, 2 ) . ' ' . 
-                     $post['hour'];
-
         $author     = ( isset( $post['author'] ) && $post['author'] != '' ) ? $post['author'] : 0;
 
         $categories = ( isset( $post['categories'] ) && count( $post['categories'] ) > 0 ) ? 
@@ -26,14 +21,24 @@ if ( isset( $_POST ) && count($_POST) > 0 ) {
         $postarr = array(
             'post_title'    => wp_strip_all_tags( $post['title'] ),
             'post_content'  => $post['content'],
-            'post_date'     => $full_date,
             'post_author'   => $author,
             'post_category' => $categories,
             'tags_input'    => $tags,
             'post_status'   => 'publish',
         );        
+
+        if ( isset( $post['date'] ) && $post['date'] != '' &&
+             isset( $post['hour'] ) && $post['hour'] != '' ) {
+
+            $postarr['post_date'] = substr( $post['date'], 6, 4 ) . '-' . 
+                                    substr( $post['date'], 3, 2 ) . '-' . 
+                                    substr( $post['date'], 0, 2 ) . ' ' . 
+                                    $post['hour'];
+        }
         
-        if ( isset( $_FILES['posts']['name'][$key]['file'] ) ) {
+        if ( isset( $_FILES['posts']['name'][$key]['file'] ) && 
+             $_FILES['posts']['name'][$key]['file'] != '' ) {
+
             $post['file'] = array(
                 'name'      => $_FILES['posts']['name'][$key]['file'],
                 'type'      => $_FILES['posts']['type'][$key]['file'],
@@ -41,6 +46,7 @@ if ( isset( $_POST ) && count($_POST) > 0 ) {
                 'error'     => $_FILES['posts']['error'][$key]['file'],
                 'size'      => $_FILES['posts']['size'][$key]['file'],
             );
+            
         }
 
         if ( $post_id = wp_insert_post( $postarr ) ) {

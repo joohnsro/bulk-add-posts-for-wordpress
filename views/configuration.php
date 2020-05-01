@@ -14,14 +14,14 @@
             <div class="post-item">
                 <h3>Publicação #<span class="loopIndex">1</span></h3>
                 <div class="post-prop">
-                    <input name="posts[0][title]" type="text" placeholder="Título" />
+                    <input name="posts[0][title]" type="text" placeholder="Título" required />
                 </div>
                 <div class="post-prop">
-                    <textarea name="posts[0][content]" placeholder="Conteúdo"></textarea>
+                    <textarea name="posts[0][content]" placeholder="Conteúdo" required></textarea>
                 </div>
                 <div class="post-prop double-prop">
-                    <input name="posts[0][date]" type="text" placeholder="Dia" value="01/05/2020" />
-                    <input name="posts[0][hour]" type="text" placeholder="Hora" value="16:05:10" />
+                    <input name="posts[0][date]" type="text" placeholder="Dia (dd/mm/aaaa)" />
+                    <input name="posts[0][hour]" type="text" placeholder="Hora (hh:mm:ss)" />
                 </div>
                 <div class="post-prop">
                     <label>Imagem destacada</label>
