@@ -20,8 +20,8 @@
                     <textarea name="posts[0][content]" placeholder="Conteúdo" required></textarea>
                 </div>
                 <div class="post-prop double-prop">
-                    <input name="posts[0][date]" type="text" placeholder="Dia (dd/mm/aaaa)" />
-                    <input name="posts[0][hour]" type="text" placeholder="Hora (hh:mm:ss)" />
+                    <input name="posts[0][date]" type="text" placeholder="Dia (dd/mm/aaaa)" class="date" />
+                    <input name="posts[0][hour]" type="text" placeholder="Hora (hh:mm:ss)" class="time" />
                 </div>
                 <div class="post-prop">
                     <label>Imagem destacada</label>
