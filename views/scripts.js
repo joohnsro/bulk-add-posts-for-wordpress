@@ -40,3 +40,29 @@ function addPostSketch( event ) {
 
     parent.appendChild(newPost);
 }
+
+var dateInput = document.querySelector('.date');
+
+dateInput.addEventListener('keydown', function( event ){
+
+    var element = event.target,
+        value   = element.value,
+        index   = value.length;
+
+    needBeInt( event.key );
+            
+
+
+    function needBeInt( key ) {
+        if ( key.match(/\D/) ) {
+            element.value = value.substr( 0, value.length - 1 );
+        }
+    }    
+
+    function needBeSlash( key ) {
+        if ( !key.match(/\//) ) {
+            element.value = value.substr( 0, value.length - 1 );
+        }
+    }    
+
+});
