@@ -45,24 +45,22 @@ var dateInput = document.querySelector('.date');
 
 dateInput.addEventListener('keydown', function( event ){
 
-    var element = event.target,
-        value   = element.value,
-        index   = value.length;
+    var element  = event.target,
+        value    = element.value.split("");
 
-    needBeInt( event.key );
-            
+    value.map(function(item, index, value){
+        var res = needBeInt( item );
+        if ( !res && item != '/' ) {
+            delete value[index];
+        }
+    });
 
+    element.value =  value.join('');
 
     function needBeInt( key ) {
-        if ( key.match(/\D/) ) {
-            element.value = value.substr( 0, value.length - 1 );
-        }
-    }    
+        if ( key.match(/\D/) ) return false;
 
-    function needBeSlash( key ) {
-        if ( !key.match(/\//) ) {
-            element.value = value.substr( 0, value.length - 1 );
-        }
+        return true
     }    
 
 });
