@@ -119,3 +119,104 @@ class TimeInput extends CalendarInput {
 
 var dateInputs = new CalendarInput( '.date' );
 var timeInputs = new TimeInput( '.time' );
+
+class Form {
+
+    constructor( selector ) {
+        this.selector = selector;
+        this.target   = document.querySelector( selector );
+
+        this.onSubmit();
+    }
+
+    onSubmit() {
+        this.target.addEventListener( 'submit', this.handleSubmit );
+    }
+
+    handleSubmit( event ) {
+        event.preventDefault();
+
+        var dateList    = event.target.querySelectorAll( '.date' );
+        var dateErrors  = [];
+
+        dateList.forEach(function( item, index ){
+            resetStyle( item );
+            
+            if ( item.value !== '' ) {
+
+                if ( item.value.match(/\d{2}\/\d{2}\/\d{4}/) ) {
+                    
+                    var checkDate = new Date( item.value.substr(6, 4) + '-' +
+                                     item.value.substr(3, 2) + '-' + 
+                                     item.value.substr(0, 2) );
+
+                    if ( isNaN( checkDate.getDate() ) ) {
+                        dateErrors.push( { 
+                            id: index,
+                            value: 'Incorrect date format'
+                        } );
+                    }
+
+                } else {
+
+                    dateErrors.push( { 
+                        id: index,
+                        value: 'Incorrect date format'
+                    } );
+
+                }
+
+            }
+
+        });
+                    
+        if ( dateErrors.length > 0 ) {
+            dateErrors.forEach(function( item, index ){
+                errorStyle( dateList[ item.id ] );
+            });
+        }
+
+        var timeList    = event.target.querySelectorAll( '.time' );
+        var timeErrors  = [];
+
+        timeList.forEach(function( item, index ){
+            resetStyle( item );
+            
+            if ( item.value !== '' ) {
+
+                if ( !item.value.match(/\d{2}:\d{2}:\d{2}/) ) {
+                    
+                    timeErrors.push( { 
+                        id: index,
+                        value: 'Incorrect time format'
+                    } );
+
+                }
+
+            }
+
+        });
+
+        if ( timeErrors.length > 0 ) {
+            timeErrors.forEach(function( item, index ){
+                errorStyle( timeList[ item.id ] );
+            });
+        } else {
+            event.target.submit();
+        }
+
+        function errorStyle(item) {
+            item.style.borderWidth = '2px';
+            item.style.borderColor = 'red';
+        }
+
+        function resetStyle( item ) {
+            item.setAttribute( 'style', '' );
+        }
+
+    }
+
+
+}
+
+var form = new Form( 'form' );
