@@ -184,8 +184,27 @@ class Form {
             
             if ( item.value !== '' ) {
 
-                if ( !item.value.match(/\d{2}:\d{2}:\d{2}/) ) {
+                if ( item.value.match(/\d{2}:\d{2}:\d{2}/) ) {
                     
+                    var hour    = parseInt( item.value.substr( 0, 2 ) ),
+                        minute  = parseInt( item.value.substr( 3, 2 ) ),
+                        second  = parseInt( item.value.substr( 6, 2 ) );
+
+                    var hourCheck =     ( hour >= 0 && hour < 24 ) ? true : false,
+                        minuteCheck =   ( minute >= 0 && minute < 59 ) ? true : false,
+                        secondCheck =   ( second >= 0 && second < 59 ) ? true : false;
+
+                    if ( !hourCheck || !minuteCheck || !secondCheck ) {
+                            
+                        timeErrors.push( { 
+                            id: index,
+                            value: 'Incorrect time format'
+                        } );
+
+                    }
+
+                } else {
+
                     timeErrors.push( { 
                         id: index,
                         value: 'Incorrect time format'
@@ -215,7 +234,6 @@ class Form {
         }
 
     }
-
 
 }
 
