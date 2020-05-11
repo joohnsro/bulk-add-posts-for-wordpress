@@ -57,6 +57,15 @@ if ( isset( $_POST ) && count($_POST) > 0 ) {
 
                 if ( $attachment_id ) {
                     set_post_thumbnail( $post_id, $attachment_id );
+
+                    if ( isset( $post['caption'] ) && $post['caption'] != '' ) {
+
+                        $attachment_id_updated = wp_update_post( array(
+                            'ID'            => $attachment_id,
+                            'post_excerpt'  => sanitize_text_field( $post['caption'] ),
+                        ) );
+
+                    }
                 }
 
             }

@@ -28,6 +28,9 @@
                     <input name="posts[0][file]" type="file" />
                 </div>
                 <div class="post-prop">
+                    <input name="posts[0][caption]" type="text" placeholder="Legenda" />
+                </div>
+                <div class="post-prop">
                     <label>Autores</label>
                     <select name="posts[0][author]">
                     <option value=""></option>
